@@ -1,0 +1,172 @@
+openapi: 3.1.0
+info:
+  title: MODERN Partner Dashboards Technicians API
+  version: v1
+  description: Partner API for MODERN (modernis.com), a two-way customer interaction platform for heavy-equipment dealerships. The API lets authorized partners read dashboards, manage service work orders, post events and customer notifications, and maintain technicians and notes on a franchise's behalf. All requests use bearer-token authentication; tokens are obtained by exchanging franchise username/password via HTTP Basic auth against the /token endpoint and are valid for 24 hours, scoped to a single franchise. Every response returns a Modern-Request-Log-ID header used for support.
+  contact:
+    name: MODERN Support
+    url: https://docs.modernis.com/
+  x-logo:
+    url: https://modernis.com/
+servers:
+- url: https://connect.modernis.com
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Technicians
+  description: Technician records
+paths:
+  /v1/technicians:
+    get:
+      operationId: listTechnicians
+      tags:
+      - Technicians
+      summary: List technicians
+      parameters:
+      - name: dashboard_id
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Technician'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      operationId: createTechnician
+      tags:
+      - Technicians
+      summary: Create technician
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                dashboard_id:
+                  type: string
+                tech_id:
+                  type: string
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Technician'
+  /v1/technicians/{id}:
+    put:
+      operationId: updateTechnician
+      tags:
+      - Technicians
+      summary: Update technician
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                dashboard_id:
+                  type: string
+                new_tech_id:
+                  type: string
+                first_name:
+                  type: string
+                last_name:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Technician'
+    delete:
+      operationId: deleteTechnician
+      tags:
+      - Technicians
+      summary: Delete technician
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                dashboard_id:
+                  type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: deleted
+components:
+  schemas:
+    Technician:
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        tech_id:
+          type: string
+        status:
+          type: string
+    Error:
+      type: object
+      description: MODERN error envelope.
+      properties:
+        error:
+          type: string
+          example: not_found
+        error_msg:
+          type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Franchise username/password, used only against /token to obtain a bearer token.
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 24-hour bearer access token returned by /token; scoped to a single franchise.
+x-generated: '2026-07-20'
+x-method: derived
+x-source: postman/modern-partner-api.postman_collection.json (docs.modernis.com published collection 1530425)

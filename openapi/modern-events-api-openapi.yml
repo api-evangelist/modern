@@ -1,0 +1,155 @@
+openapi: 3.1.0
+info:
+  title: MODERN Partner Dashboards Events API
+  version: v1
+  description: Partner API for MODERN (modernis.com), a two-way customer interaction platform for heavy-equipment dealerships. The API lets authorized partners read dashboards, manage service work orders, post events and customer notifications, and maintain technicians and notes on a franchise's behalf. All requests use bearer-token authentication; tokens are obtained by exchanging franchise username/password via HTTP Basic auth against the /token endpoint and are valid for 24 hours, scoped to a single franchise. Every response returns a Modern-Request-Log-ID header used for support.
+  contact:
+    name: MODERN Support
+    url: https://docs.modernis.com/
+  x-logo:
+    url: https://modernis.com/
+servers:
+- url: https://connect.modernis.com
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Events
+  description: Work-order event types and event creation
+paths:
+  /v1/event_types:
+    get:
+      operationId: listEventTypes
+      tags:
+      - Events
+      summary: List event types
+      parameters:
+      - name: dashboard_id
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EventType'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/events:
+    post:
+      operationId: createEvent
+      tags:
+      - Events
+      summary: Create event
+      description: Record an event against a work order, optionally sending a customer notification and assigning a technician.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEventRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  event_status:
+                    type: string
+                  event_id:
+                    type:
+                    - integer
+                    - 'null'
+                  notification_status:
+                    type: string
+                  notification_id:
+                    type:
+                    - integer
+                    - 'null'
+                  technician_status:
+                    type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    CreateEventRequest:
+      type: object
+      properties:
+        work_order_number:
+          type: string
+        work_order_id:
+          type: string
+        event_type_id:
+          type: integer
+        send_notification:
+          type: boolean
+        notification:
+          type: string
+        notification_tags:
+          type: object
+          additionalProperties:
+            type: string
+        technician:
+          type: object
+          properties:
+            first_name:
+              type: string
+            last_name:
+              type: string
+            tech_id:
+              type: string
+    EventType:
+      type: object
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        step:
+          type: integer
+        id:
+          type: integer
+        code:
+          type: string
+    Error:
+      type: object
+      description: MODERN error envelope.
+      properties:
+        error:
+          type: string
+          example: not_found
+        error_msg:
+          type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Franchise username/password, used only against /token to obtain a bearer token.
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 24-hour bearer access token returned by /token; scoped to a single franchise.
+x-generated: '2026-07-20'
+x-method: derived
+x-source: postman/modern-partner-api.postman_collection.json (docs.modernis.com published collection 1530425)

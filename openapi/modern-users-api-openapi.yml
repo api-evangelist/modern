@@ -1,0 +1,47 @@
+openapi: 3.1.0
+info:
+  title: MODERN Partner Dashboards Users API
+  version: v1
+  description: Partner API for MODERN (modernis.com), a two-way customer interaction platform for heavy-equipment dealerships. The API lets authorized partners read dashboards, manage service work orders, post events and customer notifications, and maintain technicians and notes on a franchise's behalf. All requests use bearer-token authentication; tokens are obtained by exchanging franchise username/password via HTTP Basic auth against the /token endpoint and are valid for 24 hours, scoped to a single franchise. Every response returns a Modern-Request-Log-ID header used for support.
+  contact:
+    name: MODERN Support
+    url: https://docs.modernis.com/
+  x-logo:
+    url: https://modernis.com/
+servers:
+- url: https://connect.modernis.com
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Users
+  description: Dashboard users
+paths:
+  /v1/users:
+    get:
+      operationId: listUsers
+      tags:
+      - Users
+      summary: List users
+      parameters:
+      - name: dashboard_id
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Franchise username/password, used only against /token to obtain a bearer token.
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 24-hour bearer access token returned by /token; scoped to a single franchise.
+x-generated: '2026-07-20'
+x-method: derived
+x-source: postman/modern-partner-api.postman_collection.json (docs.modernis.com published collection 1530425)

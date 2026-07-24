@@ -1,0 +1,101 @@
+openapi: 3.1.0
+info:
+  title: MODERN Partner Dashboards Notifications API
+  version: v1
+  description: Partner API for MODERN (modernis.com), a two-way customer interaction platform for heavy-equipment dealerships. The API lets authorized partners read dashboards, manage service work orders, post events and customer notifications, and maintain technicians and notes on a franchise's behalf. All requests use bearer-token authentication; tokens are obtained by exchanging franchise username/password via HTTP Basic auth against the /token endpoint and are valid for 24 hours, scoped to a single franchise. Every response returns a Modern-Request-Log-ID header used for support.
+  contact:
+    name: MODERN Support
+    url: https://docs.modernis.com/
+  x-logo:
+    url: https://modernis.com/
+servers:
+- url: https://connect.modernis.com
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Notifications
+  description: Customer notifications
+paths:
+  /v1/notifications:
+    post:
+      operationId: sendNotification
+      tags:
+      - Notifications
+      summary: Send a notification
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                work_order_number:
+                  type: string
+                notification:
+                  type: string
+                notification_tags:
+                  type: object
+                  additionalProperties:
+                    type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  notification_status:
+                    type: string
+                  notification_id:
+                    type: integer
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    get:
+      operationId: getNotifications
+      tags:
+      - Notifications
+      summary: Get notifications
+      parameters:
+      - name: dashboard_id
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+components:
+  schemas:
+    Error:
+      type: object
+      description: MODERN error envelope.
+      properties:
+        error:
+          type: string
+          example: not_found
+        error_msg:
+          type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Franchise username/password, used only against /token to obtain a bearer token.
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 24-hour bearer access token returned by /token; scoped to a single franchise.
+x-generated: '2026-07-20'
+x-method: derived
+x-source: postman/modern-partner-api.postman_collection.json (docs.modernis.com published collection 1530425)

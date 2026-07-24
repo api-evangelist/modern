@@ -1,0 +1,236 @@
+openapi: 3.1.0
+info:
+  title: MODERN Partner Dashboards Work Orders API
+  version: v1
+  description: Partner API for MODERN (modernis.com), a two-way customer interaction platform for heavy-equipment dealerships. The API lets authorized partners read dashboards, manage service work orders, post events and customer notifications, and maintain technicians and notes on a franchise's behalf. All requests use bearer-token authentication; tokens are obtained by exchanging franchise username/password via HTTP Basic auth against the /token endpoint and are valid for 24 hours, scoped to a single franchise. Every response returns a Modern-Request-Log-ID header used for support.
+  contact:
+    name: MODERN Support
+    url: https://docs.modernis.com/
+  x-logo:
+    url: https://modernis.com/
+servers:
+- url: https://connect.modernis.com
+  description: Production
+security:
+- bearerAuth: []
+tags:
+- name: Work Orders
+  description: Service work order lifecycle
+paths:
+  /v1/work_orders:
+    get:
+      operationId: listWorkOrders
+      tags:
+      - Work Orders
+      summary: List work orders
+      parameters:
+      - name: dashboard_id
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WorkOrder'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      operationId: createWorkOrders
+      tags:
+      - Work Orders
+      summary: Create work orders
+      description: Create one or more work orders. Returns a batch processing result.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWorkOrderRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchResult'
+    put:
+      operationId: updateWorkOrder
+      tags:
+      - Work Orders
+      summary: Update work order
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  dashboard_id:
+                    type: string
+                  work_order:
+                    $ref: '#/components/schemas/WorkOrderInput'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchResult'
+  /v1/work_orders/{id}:
+    get:
+      operationId: getWorkOrder
+      tags:
+      - Work Orders
+      summary: Get work order
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: dashboard_id
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WorkOrder'
+    delete:
+      operationId: closeWorkOrder
+      tags:
+      - Work Orders
+      summary: Close work order
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  work_order:
+                    type: object
+                    properties:
+                      number:
+                        type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchResult'
+components:
+  schemas:
+    WorkOrderInput:
+      type: object
+      properties:
+        number:
+          type: string
+        overview:
+          type: string
+        internal_overview:
+          type: string
+        dashboard_indicator:
+          type: string
+        priority:
+          type: string
+    WorkOrder:
+      type: object
+      properties:
+        number:
+          type: string
+        wo_number:
+          type: string
+        created:
+          type: string
+          format: date-time
+        last_customer_update:
+          type: string
+          format: date-time
+        status:
+          type: string
+          example: active
+        id:
+          type: string
+        last_event:
+          type: object
+    BatchResult:
+      type: object
+      properties:
+        message:
+          type: string
+        result:
+          type: object
+          properties:
+            total:
+              type: integer
+            successful:
+              type: integer
+            failed:
+              type: integer
+            failing_records:
+              type: array
+              items:
+                type: string
+    CreateWorkOrderRequest:
+      type: object
+      properties:
+        dashboard_id:
+          type: string
+        advisor:
+          type: object
+          properties:
+            id:
+              type: string
+            email_address:
+              type: string
+        work_order:
+          $ref: '#/components/schemas/WorkOrderInput'
+    Error:
+      type: object
+      description: MODERN error envelope.
+      properties:
+        error:
+          type: string
+          example: not_found
+        error_msg:
+          type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Franchise username/password, used only against /token to obtain a bearer token.
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 24-hour bearer access token returned by /token; scoped to a single franchise.
+x-generated: '2026-07-20'
+x-method: derived
+x-source: postman/modern-partner-api.postman_collection.json (docs.modernis.com published collection 1530425)

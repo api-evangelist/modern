@@ -1,0 +1,19 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/modern-partner-api-openapi.yml
+standards:
+  - id: oauth2
+    conforms: false
+    evidence: Auth is HTTP Basic -> opaque bearer token, not an OAuth 2.0 flow.
+  - id: oidc
+    conforms: false
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Errors use a custom { error, error_msg } envelope, not application/problem+json.
+  - id: rfc8594-sunset-header
+    conforms: false
+  - id: json:api
+    conforms: false
+  - id: rest-json
+    conforms: true
+    evidence: Resource-oriented JSON over HTTPS with /v1 URI versioning and standard verbs.

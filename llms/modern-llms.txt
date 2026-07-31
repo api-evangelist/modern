@@ -1,0 +1,38 @@
+# MODERN Partner API
+
+> MODERN (modernis.com) is a two-way customer interaction platform for heavy-equipment dealerships across construction, agriculture, mining, landscaping, and material handling. The Partner API lets authorized integrators read dealership dashboards, manage service work orders, post work-order events, send customer notifications, and maintain technicians and notes on a franchise's behalf.
+
+## Authentication
+- Exchange a franchise username/password via HTTP Basic auth against POST /token to receive a bearer access token (valid 24 hours, scoped to a single franchise).
+- All /v1/* endpoints require the bearer token.
+- Every response returns a Modern-Request-Log-ID header used for support.
+
+## APIs
+- MODERN Partner API docs: https://docs.modernis.com/
+- Production base URL: https://connect.modernis.com
+
+## Specs
+- OpenAPI (derived): openapi/modern-partner-api-openapi.yml
+- Postman collection (source): postman/modern-partner-api.postman_collection.json
+
+## Artifacts
+- Authentication profile: authentication/modern-authentication.yml
+- API conventions: conventions/modern-conventions.yml
+- Error codes: errors/modern-error-codes.yml
+- Data model: data-model/modern-data-model.yml
+- Lifecycle: lifecycle/modern-lifecycle.yml
+- MCP (candidate tools): mcp/modern-mcp.yml
+
+## Resources
+- Dashboards (GET /v1/dashboards, /v1/dashboards/types)
+- Event types (GET /v1/event_types), Events (POST /v1/events)
+- Work orders (GET/POST/PUT/DELETE /v1/work_orders)
+- Notifications (POST/GET /v1/notifications)
+- Notes (GET/POST/DELETE /v1/notes)
+- Technicians (GET/POST/PUT/DELETE /v1/technicians)
+- Users (GET /v1/users)
+
+## Company
+- Website: https://modernis.com/
+- Login: https://service.modernis.com/login
+- Privacy: https://modernis.com/privacy-policy/

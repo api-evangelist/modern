@@ -1,0 +1,19 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for MODERN Partner API
+  version: 1.0.0
+extends: openapi/modern-partner-api-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-enriched: '2026-07-20'
+      x-apievangelist-source: docs.modernis.com published Postman collection
+      x-request-id-header: Modern-Request-Log-ID
+  - target: $.info
+    update:
+      x-industry: heavy-equipment-dealership
+      x-capabilities:
+        - service-work-orders
+        - customer-notifications
+        - technician-management
+        - dealership-dashboards

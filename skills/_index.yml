@@ -1,0 +1,11 @@
+generated: '2026-07-20'
+method: generated
+skills:
+  - file: modern-update-service-status.md
+    name: Update service status and notify the customer
+    api: openapi/modern-partner-api-openapi.yml
+    operations: [requestAccessToken, listDashboards, listEventTypes, listWorkOrders, createEvent]
+  - file: modern-manage-work-orders.md
+    name: Create and manage work orders
+    api: openapi/modern-partner-api-openapi.yml
+    operations: [requestAccessToken, createWorkOrders, getWorkOrder, updateWorkOrder, closeWorkOrder, createNote, listNotes]

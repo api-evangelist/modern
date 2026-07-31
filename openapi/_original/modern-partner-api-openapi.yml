@@ -1,0 +1,603 @@
+openapi: 3.1.0
+x-generated: '2026-07-20'
+x-method: derived
+x-source: postman/modern-partner-api.postman_collection.json (docs.modernis.com published collection 1530425)
+info:
+  title: MODERN Partner API
+  version: v1
+  description: >-
+    Partner API for MODERN (modernis.com), a two-way customer interaction platform
+    for heavy-equipment dealerships. The API lets authorized partners read dashboards,
+    manage service work orders, post events and customer notifications, and maintain
+    technicians and notes on a franchise's behalf. All requests use bearer-token
+    authentication; tokens are obtained by exchanging franchise username/password via
+    HTTP Basic auth against the /token endpoint and are valid for 24 hours, scoped to a
+    single franchise. Every response returns a Modern-Request-Log-ID header used for support.
+  contact:
+    name: MODERN Support
+    url: https://docs.modernis.com/
+  x-logo:
+    url: https://modernis.com/
+servers:
+  - url: https://connect.modernis.com
+    description: Production
+tags:
+  - name: Federation
+    description: Token exchange / authentication
+  - name: Dashboards
+    description: Franchise dashboards and dashboard types
+  - name: Events
+    description: Work-order event types and event creation
+  - name: Work Orders
+    description: Service work order lifecycle
+  - name: Notifications
+    description: Customer notifications
+  - name: Notes
+    description: Technician / work-order notes
+  - name: Technicians
+    description: Technician records
+  - name: Users
+    description: Dashboard users
+paths:
+  /token:
+    post:
+      operationId: requestAccessToken
+      tags: [Federation]
+      summary: Request access token
+      description: >-
+        Exchange the franchise username/password (via HTTP Basic auth) for a bearer
+        access token. Tokens are valid for 24 hours and scoped to a single franchise.
+      security:
+        - basicAuth: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  franchise: { type: string }
+                  access_token: { type: string }
+                  token_type: { type: string, example: Bearer }
+                  expires_in: { type: integer }
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+  /v1/dashboards:
+    get:
+      operationId: listDashboards
+      tags: [Dashboards]
+      summary: List dashboards
+      description: List the franchise's dashboards.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Dashboard' }
+  /v1/dashboards/types:
+    get:
+      operationId: listDashboardTypes
+      tags: [Dashboards]
+      summary: List dashboard types
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name: { type: string, example: field_service }
+  /v1/event_types:
+    get:
+      operationId: listEventTypes
+      tags: [Events]
+      summary: List event types
+      parameters:
+        - name: dashboard_id
+          in: query
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/EventType' }
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+  /v1/events:
+    post:
+      operationId: createEvent
+      tags: [Events]
+      summary: Create event
+      description: Record an event against a work order, optionally sending a customer notification and assigning a technician.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CreateEventRequest' }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  event_status: { type: string }
+                  event_id: { type: [integer, 'null'] }
+                  notification_status: { type: string }
+                  notification_id: { type: [integer, 'null'] }
+                  technician_status: { type: string }
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+  /v1/work_orders:
+    get:
+      operationId: listWorkOrders
+      tags: [Work Orders]
+      summary: List work orders
+      parameters:
+        - name: dashboard_id
+          in: query
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/WorkOrder' }
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+    post:
+      operationId: createWorkOrders
+      tags: [Work Orders]
+      summary: Create work orders
+      description: Create one or more work orders. Returns a batch processing result.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CreateWorkOrderRequest' }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/BatchResult' }
+    put:
+      operationId: updateWorkOrder
+      tags: [Work Orders]
+      summary: Update work order
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  dashboard_id: { type: string }
+                  work_order: { $ref: '#/components/schemas/WorkOrderInput' }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/BatchResult' }
+  /v1/work_orders/{id}:
+    get:
+      operationId: getWorkOrder
+      tags: [Work Orders]
+      summary: Get work order
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+        - name: dashboard_id
+          in: query
+          required: false
+          schema: { type: string }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/WorkOrder' }
+    delete:
+      operationId: closeWorkOrder
+      tags: [Work Orders]
+      summary: Close work order
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  work_order:
+                    type: object
+                    properties:
+                      number: { type: string }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/BatchResult' }
+  /v1/notifications:
+    post:
+      operationId: sendNotification
+      tags: [Notifications]
+      summary: Send a notification
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                work_order_number: { type: string }
+                notification: { type: string }
+                notification_tags: { type: object, additionalProperties: { type: string } }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  notification_status: { type: string }
+                  notification_id: { type: integer }
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+    get:
+      operationId: getNotifications
+      tags: [Notifications]
+      summary: Get notifications
+      parameters:
+        - name: dashboard_id
+          in: query
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: OK
+  /v1/notes:
+    get:
+      operationId: listNotes
+      tags: [Notes]
+      summary: List notes
+      parameters:
+        - name: work_order_number
+          in: query
+          required: false
+          schema: { type: string }
+        - name: work_order_id
+          in: query
+          required: false
+          schema: { type: string }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Note' }
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+    post:
+      operationId: createNote
+      tags: [Notes]
+      summary: Create note
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                work_order_number: { type: string }
+                work_order_id: { type: string }
+                note_text: { type: string }
+                user_id: { type: string }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string }
+                  warning: { type: string }
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+  /v1/notes/{id}:
+    delete:
+      operationId: deleteNote
+      tags: [Notes]
+      summary: Delete / redact note
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string, example: deleted }
+  /v1/technicians:
+    get:
+      operationId: listTechnicians
+      tags: [Technicians]
+      summary: List technicians
+      parameters:
+        - name: dashboard_id
+          in: query
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Technician' }
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+    post:
+      operationId: createTechnician
+      tags: [Technicians]
+      summary: Create technician
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                dashboard_id: { type: string }
+                tech_id: { type: string }
+                first_name: { type: string }
+                last_name: { type: string }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Technician' }
+  /v1/technicians/{id}:
+    put:
+      operationId: updateTechnician
+      tags: [Technicians]
+      summary: Update technician
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                dashboard_id: { type: string }
+                new_tech_id: { type: string }
+                first_name: { type: string }
+                last_name: { type: string }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Technician' }
+    delete:
+      operationId: deleteTechnician
+      tags: [Technicians]
+      summary: Delete technician
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                dashboard_id: { type: string }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string, example: deleted }
+  /v1/users:
+    get:
+      operationId: listUsers
+      tags: [Users]
+      summary: List users
+      parameters:
+        - name: dashboard_id
+          in: query
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: OK
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Franchise username/password, used only against /token to obtain a bearer token.
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: 24-hour bearer access token returned by /token; scoped to a single franchise.
+  schemas:
+    Error:
+      type: object
+      description: MODERN error envelope.
+      properties:
+        error: { type: string, example: not_found }
+        error_msg: { type: string }
+    Dashboard:
+      type: object
+      properties:
+        name: { type: string }
+        id: { type: string }
+        type: { type: string, example: field_service }
+    EventType:
+      type: object
+      properties:
+        name: { type: string }
+        message: { type: string }
+        step: { type: integer }
+        id: { type: integer }
+        code: { type: string }
+    WorkOrder:
+      type: object
+      properties:
+        number: { type: string }
+        wo_number: { type: string }
+        created: { type: string, format: date-time }
+        last_customer_update: { type: string, format: date-time }
+        status: { type: string, example: active }
+        id: { type: string }
+        last_event: { type: object }
+    WorkOrderInput:
+      type: object
+      properties:
+        number: { type: string }
+        overview: { type: string }
+        internal_overview: { type: string }
+        dashboard_indicator: { type: string }
+        priority: { type: string }
+    CreateWorkOrderRequest:
+      type: object
+      properties:
+        dashboard_id: { type: string }
+        advisor:
+          type: object
+          properties:
+            id: { type: string }
+            email_address: { type: string }
+        work_order: { $ref: '#/components/schemas/WorkOrderInput' }
+    CreateEventRequest:
+      type: object
+      properties:
+        work_order_number: { type: string }
+        work_order_id: { type: string }
+        event_type_id: { type: integer }
+        send_notification: { type: boolean }
+        notification: { type: string }
+        notification_tags: { type: object, additionalProperties: { type: string } }
+        technician:
+          type: object
+          properties:
+            first_name: { type: string }
+            last_name: { type: string }
+            tech_id: { type: string }
+    Note:
+      type: object
+      properties:
+        note: { type: string }
+        status: { type: string }
+        can_be_deleted: { type: boolean }
+        type: { type: string }
+        created: { type: string, format: date-time }
+        id: { type: string }
+    Technician:
+      type: object
+      properties:
+        first_name: { type: string }
+        last_name: { type: string }
+        tech_id: { type: string }
+        status: { type: string }
+    BatchResult:
+      type: object
+      properties:
+        message: { type: string }
+        result:
+          type: object
+          properties:
+            total: { type: integer }
+            successful: { type: integer }
+            failed: { type: integer }
+            failing_records:
+              type: array
+              items: { type: string }
+security:
+  - bearerAuth: []

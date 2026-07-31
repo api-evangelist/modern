@@ -1,0 +1,18 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/modern-partner-api-openapi.yml + https://docs.modernis.com/
+versioning:
+  scheme: uri-path
+  current: v1
+  docs: https://docs.modernis.com/
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No deprecation policy or RFC 8594 Sunset/Deprecation header support is documented.
+sla:
+  url: null
+status_page: null
+deprecated_operations: []
+notes: >-
+  The MODERN Partner API is a single stable v1 surface documented via a published
+  Postman collection. No public status page, changelog, or deprecation policy was found.

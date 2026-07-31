@@ -1,8 +1,28 @@
 aid: modern
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/modern.png
 name: Modern
-description: Modern is a company surfaced as a portfolio company of techstars, y-combinator and added
-  to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment
-  pipeline.
+description: >-
+  Modern (modernis.com) is a two-way customer interaction platform for heavy-equipment
+  dealerships, unifying service communications "from intake to invoice" across construction,
+  agriculture, mining, landscaping, and material-handling sectors. It provides two-way text
+  and email messaging, digital repair-order approvals, inspection and warranty documentation,
+  outbound maintenance scheduling, rental tracking, parts-order status, and DMS integration.
+  The MODERN Partner API (docs.modernis.com, base https://connect.modernis.com) lets authorized
+  integrators read dealership dashboards, manage service work orders, post work-order events,
+  send customer notifications, and maintain technicians and notes on a franchise's behalf using
+  24-hour bearer tokens exchanged from franchise credentials.
 url: https://raw.githubusercontent.com/api-evangelist/modern/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -13,15 +33,275 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
 tags:
 - Company
-apis: []
+- Heavy Equipment
+- Dealership
+- Field Service
+- Work Orders
+- Customer Communications
+- Notifications
+- Partner API
+apis:
+- aid: modern:modern-dashboards-api
+  name: Modern Dashboards API
+  description: Franchise dashboards and dashboard types
+  humanURL: https://docs.modernis.com/
+  baseURL: https://connect.modernis.com
+  tags:
+  - Dashboards
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-dashboards-api-openapi.yml
+  - type: Postman
+    url: >-
+      https://docs.modernis.com/api/collections/1530425/RWEgreaJ?segregateAuth=true&versionTag=latest
+  - type: PostmanCollection
+    url: postman/modern-partner-api.postman_collection.json
+  - type: Authentication
+    url: authentication/modern-authentication.yml
+  - type: Conventions
+    url: conventions/modern-conventions.yml
+  - type: ErrorCatalog
+    url: errors/modern-error-codes.yml
+  - type: DataModel
+    url: data-model/modern-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/modern-lifecycle.yml
+  - type: Conformance
+    url: conformance/modern-conformance.yml
+  - type: LLMsTxt
+    url: llms/modern-llms.txt
+- aid: modern:modern-events-api
+  name: Modern Events API
+  description: Work-order event types and event creation
+  humanURL: https://docs.modernis.com/
+  baseURL: https://connect.modernis.com
+  tags:
+  - Events
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-events-api-openapi.yml
+  - type: Postman
+    url: >-
+      https://docs.modernis.com/api/collections/1530425/RWEgreaJ?segregateAuth=true&versionTag=latest
+  - type: PostmanCollection
+    url: postman/modern-partner-api.postman_collection.json
+  - type: Authentication
+    url: authentication/modern-authentication.yml
+  - type: Conventions
+    url: conventions/modern-conventions.yml
+  - type: ErrorCatalog
+    url: errors/modern-error-codes.yml
+  - type: DataModel
+    url: data-model/modern-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/modern-lifecycle.yml
+  - type: Conformance
+    url: conformance/modern-conformance.yml
+  - type: LLMsTxt
+    url: llms/modern-llms.txt
+- aid: modern:modern-federation-api
+  name: Modern Federation API
+  description: Token exchange / authentication
+  humanURL: https://docs.modernis.com/
+  baseURL: https://connect.modernis.com
+  tags:
+  - Federation
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-federation-api-openapi.yml
+  - type: Postman
+    url: >-
+      https://docs.modernis.com/api/collections/1530425/RWEgreaJ?segregateAuth=true&versionTag=latest
+  - type: PostmanCollection
+    url: postman/modern-partner-api.postman_collection.json
+  - type: Authentication
+    url: authentication/modern-authentication.yml
+  - type: Conventions
+    url: conventions/modern-conventions.yml
+  - type: ErrorCatalog
+    url: errors/modern-error-codes.yml
+  - type: DataModel
+    url: data-model/modern-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/modern-lifecycle.yml
+  - type: Conformance
+    url: conformance/modern-conformance.yml
+  - type: LLMsTxt
+    url: llms/modern-llms.txt
+- aid: modern:modern-notes-api
+  name: Modern Notes API
+  description: Technician / work-order notes
+  humanURL: https://docs.modernis.com/
+  baseURL: https://connect.modernis.com
+  tags:
+  - Notes
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-notes-api-openapi.yml
+  - type: Postman
+    url: >-
+      https://docs.modernis.com/api/collections/1530425/RWEgreaJ?segregateAuth=true&versionTag=latest
+  - type: PostmanCollection
+    url: postman/modern-partner-api.postman_collection.json
+  - type: Authentication
+    url: authentication/modern-authentication.yml
+  - type: Conventions
+    url: conventions/modern-conventions.yml
+  - type: ErrorCatalog
+    url: errors/modern-error-codes.yml
+  - type: DataModel
+    url: data-model/modern-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/modern-lifecycle.yml
+  - type: Conformance
+    url: conformance/modern-conformance.yml
+  - type: LLMsTxt
+    url: llms/modern-llms.txt
+- aid: modern:modern-notifications-api
+  name: Modern Notifications API
+  description: Customer notifications
+  humanURL: https://docs.modernis.com/
+  baseURL: https://connect.modernis.com
+  tags:
+  - Notifications
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-notifications-api-openapi.yml
+  - type: Postman
+    url: >-
+      https://docs.modernis.com/api/collections/1530425/RWEgreaJ?segregateAuth=true&versionTag=latest
+  - type: PostmanCollection
+    url: postman/modern-partner-api.postman_collection.json
+  - type: Authentication
+    url: authentication/modern-authentication.yml
+  - type: Conventions
+    url: conventions/modern-conventions.yml
+  - type: ErrorCatalog
+    url: errors/modern-error-codes.yml
+  - type: DataModel
+    url: data-model/modern-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/modern-lifecycle.yml
+  - type: Conformance
+    url: conformance/modern-conformance.yml
+  - type: LLMsTxt
+    url: llms/modern-llms.txt
+- aid: modern:modern-technicians-api
+  name: Modern Technicians API
+  description: Technician records
+  humanURL: https://docs.modernis.com/
+  baseURL: https://connect.modernis.com
+  tags:
+  - Technicians
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-technicians-api-openapi.yml
+  - type: Postman
+    url: >-
+      https://docs.modernis.com/api/collections/1530425/RWEgreaJ?segregateAuth=true&versionTag=latest
+  - type: PostmanCollection
+    url: postman/modern-partner-api.postman_collection.json
+  - type: Authentication
+    url: authentication/modern-authentication.yml
+  - type: Conventions
+    url: conventions/modern-conventions.yml
+  - type: ErrorCatalog
+    url: errors/modern-error-codes.yml
+  - type: DataModel
+    url: data-model/modern-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/modern-lifecycle.yml
+  - type: Conformance
+    url: conformance/modern-conformance.yml
+  - type: LLMsTxt
+    url: llms/modern-llms.txt
+- aid: modern:modern-users-api
+  name: Modern Users API
+  description: Dashboard users
+  humanURL: https://docs.modernis.com/
+  baseURL: https://connect.modernis.com
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-users-api-openapi.yml
+  - type: Postman
+    url: >-
+      https://docs.modernis.com/api/collections/1530425/RWEgreaJ?segregateAuth=true&versionTag=latest
+  - type: PostmanCollection
+    url: postman/modern-partner-api.postman_collection.json
+  - type: Authentication
+    url: authentication/modern-authentication.yml
+  - type: Conventions
+    url: conventions/modern-conventions.yml
+  - type: ErrorCatalog
+    url: errors/modern-error-codes.yml
+  - type: DataModel
+    url: data-model/modern-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/modern-lifecycle.yml
+  - type: Conformance
+    url: conformance/modern-conformance.yml
+  - type: LLMsTxt
+    url: llms/modern-llms.txt
+- aid: modern:modern-work-orders-api
+  name: Modern Work Orders API
+  description: Service work order lifecycle
+  humanURL: https://docs.modernis.com/
+  baseURL: https://connect.modernis.com
+  tags:
+  - Work Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/modern-work-orders-api-openapi.yml
+  - type: Postman
+    url: >-
+      https://docs.modernis.com/api/collections/1530425/RWEgreaJ?segregateAuth=true&versionTag=latest
+  - type: PostmanCollection
+    url: postman/modern-partner-api.postman_collection.json
+  - type: Authentication
+    url: authentication/modern-authentication.yml
+  - type: Conventions
+    url: conventions/modern-conventions.yml
+  - type: ErrorCatalog
+    url: errors/modern-error-codes.yml
+  - type: DataModel
+    url: data-model/modern-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/modern-lifecycle.yml
+  - type: Conformance
+    url: conformance/modern-conformance.yml
+  - type: LLMsTxt
+    url: llms/modern-llms.txt
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/modern-domain-security.yml
 - type: Website
   url: https://modernis.com/
+- type: DeveloperPortal
+  url: https://docs.modernis.com/
+- type: Documentation
+  url: https://docs.modernis.com/
+- type: APIReference
+  url: https://docs.modernis.com/
+- type: Authentication
+  url: authentication/modern-authentication.yml
+- type: Login
+  url: https://service.modernis.com/login
+- type: PrivacyPolicy
+  url: https://modernis.com/privacy-policy/
+- type: AgentSkill
+  url: skills/_index.yml
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 16
+  pass: local-v1

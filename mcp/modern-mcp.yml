@@ -1,0 +1,70 @@
+generated: '2026-07-20'
+method: derived
+status: candidate
+source: openapi/modern-partner-api-openapi.yml
+server:
+  name: modern
+  transport: http
+  url: null
+  note: No official hosted/remote MCP server was found. Tools below are a candidate mapping (one per OpenAPI operation) for a future MCP server.
+tools:
+  - name: request_access_token
+    description: Exchange franchise username/password for a 24h bearer token
+    source_operation: openapi/modern-partner-api-openapi.yml#requestAccessToken
+  - name: list_dashboards
+    description: List the franchise's dashboards
+    source_operation: openapi/modern-partner-api-openapi.yml#listDashboards
+  - name: list_dashboard_types
+    description: List dashboard types
+    source_operation: openapi/modern-partner-api-openapi.yml#listDashboardTypes
+  - name: list_event_types
+    description: List event types for a dashboard
+    source_operation: openapi/modern-partner-api-openapi.yml#listEventTypes
+  - name: create_event
+    description: Record an event on a work order, optionally notifying the customer
+    source_operation: openapi/modern-partner-api-openapi.yml#createEvent
+  - name: list_work_orders
+    description: List work orders for a dashboard
+    source_operation: openapi/modern-partner-api-openapi.yml#listWorkOrders
+  - name: get_work_order
+    description: Get a single work order
+    source_operation: openapi/modern-partner-api-openapi.yml#getWorkOrder
+  - name: create_work_orders
+    description: Create one or more work orders
+    source_operation: openapi/modern-partner-api-openapi.yml#createWorkOrders
+  - name: update_work_order
+    description: Update work orders
+    source_operation: openapi/modern-partner-api-openapi.yml#updateWorkOrder
+  - name: close_work_order
+    description: Close a work order
+    source_operation: openapi/modern-partner-api-openapi.yml#closeWorkOrder
+  - name: send_notification
+    description: Send a customer notification for a work order
+    source_operation: openapi/modern-partner-api-openapi.yml#sendNotification
+  - name: get_notifications
+    description: Get notifications for a dashboard
+    source_operation: openapi/modern-partner-api-openapi.yml#getNotifications
+  - name: list_notes
+    description: List notes on a work order
+    source_operation: openapi/modern-partner-api-openapi.yml#listNotes
+  - name: create_note
+    description: Create a note on a work order
+    source_operation: openapi/modern-partner-api-openapi.yml#createNote
+  - name: delete_note
+    description: Delete or redact a note
+    source_operation: openapi/modern-partner-api-openapi.yml#deleteNote
+  - name: list_technicians
+    description: List technicians for a dashboard
+    source_operation: openapi/modern-partner-api-openapi.yml#listTechnicians
+  - name: create_technician
+    description: Create a technician
+    source_operation: openapi/modern-partner-api-openapi.yml#createTechnician
+  - name: update_technician
+    description: Update a technician
+    source_operation: openapi/modern-partner-api-openapi.yml#updateTechnician
+  - name: delete_technician
+    description: Delete a technician
+    source_operation: openapi/modern-partner-api-openapi.yml#deleteTechnician
+  - name: list_users
+    description: List users for a dashboard
+    source_operation: openapi/modern-partner-api-openapi.yml#listUsers

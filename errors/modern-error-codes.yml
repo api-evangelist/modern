@@ -1,0 +1,50 @@
+generated: '2026-07-20'
+method: derived
+source: postman/modern-partner-api.postman_collection.json (example responses)
+format: custom
+envelope:
+  shape: '{ "error": "<code>", "error_msg": "<human message>" }'
+  content_type: application/json
+  rfc9457: false
+errors:
+  - code: invalid_credentials
+    http_status: 401
+    title: Invalid client or client credentials
+    remediation: Verify the franchise username/password used for Basic auth against /token.
+    source_operation: openapi/modern-partner-api-openapi.yml#requestAccessToken
+  - code: not_found
+    http_status: 404
+    title: Resource not found
+    message_examples:
+      - "Could not find a Business with dashboard_id: <id>."
+      - "Could not find a Work Order with work_order_id: <id>."
+      - "Could not find a Dashboard with dashboard_id: <id>."
+    remediation: Confirm the dashboard_id / work_order identifier belongs to the authorized franchise.
+    source_operation: openapi/modern-partner-api-openapi.yml#listEventTypes
+  - code: missing_required_params
+    http_status: 422
+    title: Missing required parameters
+    message_examples:
+      - "Missing required parameters: dashboard_id."
+      - "You must provide one of work_order_id or work_order_number."
+    remediation: Supply the required query/body parameters for the operation.
+    source_operation: openapi/modern-partner-api-openapi.yml#listWorkOrders
+  - code: prevented_duplicate_record
+    http_status: 422
+    title: Duplicate record prevented
+    message_examples:
+      - "Tried to create duplicate Note with value: <value>"
+    remediation: The record already exists; do not resubmit the identical value.
+    source_operation: openapi/modern-partner-api-openapi.yml#createNote
+  - code: notification_not_delivered
+    http_status: 403
+    title: Notification not delivered
+    message_examples:
+      - "The recipients contact preference is set to phone call."
+    remediation: The recipient opted out of text/email; no delivery is possible via the API.
+    source_operation: openapi/modern-partner-api-openapi.yml#sendNotification
+batch_failures:
+  note: >-
+    Work-order create/update/close return HTTP 200 with a batch envelope; per-record
+    problems appear as strings in result.failing_records (e.g. "Could not find dashboard
+    with provided dashboard ID", "Tried to create duplicate work order").

@@ -1,0 +1,84 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/modern-partner-api-openapi.yml
+entities:
+  - name: Dashboard
+    id: id
+    id_shape: opaque-token (e.g. Hc6srS-G-p2WVFc1KOt77A)
+    fields: [name, id, type]
+    types: [field_service, sales_and_rental, component_rebuild, fabrication, shop_service]
+  - name: EventType
+    id: id
+    id_shape: integer
+    fields: [name, message, step, id, code]
+    belongs_to: Dashboard (via dashboard_id)
+  - name: WorkOrder
+    id: id
+    id_shape: uuid or opaque-token; human number in wo_number/number
+    fields: [number, wo_number, created, last_customer_update, status, id, last_event]
+    belongs_to: Dashboard (via dashboard_id)
+  - name: Event
+    id: event_id
+    id_shape: integer
+    belongs_to: WorkOrder (via work_order_id / work_order_number)
+    references: EventType (via event_type_id), Technician (via technician)
+    may_create: Notification
+  - name: Notification
+    id: notification_id
+    id_shape: integer
+    belongs_to: WorkOrder (via work_order_number)
+  - name: Note
+    id: id
+    id_shape: opaque-token
+    fields: [note, status, can_be_deleted, type, created, id]
+    belongs_to: WorkOrder (via work_order_number / work_order_id)
+    references: User (via user_id)
+  - name: Technician
+    id: tech_id
+    id_shape: string (dealer-assigned)
+    fields: [first_name, last_name, tech_id, status]
+    belongs_to: Dashboard (via dashboard_id)
+  - name: User
+    id: id
+    belongs_to: Dashboard (via dashboard_id)
+relationships:
+  - from: EventType
+    to: Dashboard
+    kind: belongs_to
+    via: dashboard_id
+  - from: WorkOrder
+    to: Dashboard
+    kind: belongs_to
+    via: dashboard_id
+  - from: Event
+    to: WorkOrder
+    kind: belongs_to
+    via: work_order_id
+  - from: Event
+    to: EventType
+    kind: has_one
+    via: event_type_id
+  - from: Event
+    to: Technician
+    kind: has_one
+    via: technician
+  - from: Notification
+    to: WorkOrder
+    kind: belongs_to
+    via: work_order_number
+  - from: Note
+    to: WorkOrder
+    kind: belongs_to
+    via: work_order_number
+  - from: Note
+    to: User
+    kind: has_one
+    via: user_id
+  - from: Technician
+    to: Dashboard
+    kind: belongs_to
+    via: dashboard_id
+  - from: User
+    to: Dashboard
+    kind: belongs_to
+    via: dashboard_id

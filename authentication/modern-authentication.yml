@@ -1,0 +1,25 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.modernis.com/ (MODERN Partner API published documentation)
+summary:
+  types: [http-basic, http-bearer]
+  api_key_in: []
+  oauth2_flows: []
+  notes: >-
+    Two-step auth. Franchise username/password are exchanged via HTTP Basic auth
+    against POST /token to obtain a bearer access token. All other endpoints require
+    the bearer token. Tokens are valid for 24 hours and scoped to a single franchise;
+    partners receive a separate username/password per franchise they act on behalf of.
+schemes:
+  - name: basicAuth
+    type: http
+    scheme: basic
+    used_by: [POST /token]
+    sources: [openapi/modern-partner-api-openapi.yml]
+  - name: bearerAuth
+    type: http
+    scheme: bearer
+    token_lifetime_hours: 24
+    scope: single-franchise
+    used_by: [all /v1/* endpoints]
+    sources: [openapi/modern-partner-api-openapi.yml]

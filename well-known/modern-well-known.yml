@@ -1,0 +1,22 @@
+generated: '2026-07-20'
+method: probed
+host: https://modernis.com
+documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 301
+    note: redirects to site 404 handler; not a real OIDC document
+  - path: /.well-known/oauth-authorization-server
+    status: 301
+  - path: /.well-known/api-catalog
+    status: 301
+  - path: /.well-known/ai-plugin.json
+    status: 301
+also_probed:
+  - host: https://service.modernis.com
+    results:
+      - {path: /.well-known/security.txt, status: 404}
+      - {path: /.well-known/openid-configuration, status: 404}
+      - {path: /.well-known/oauth-authorization-server, status: 404}
+notes: No .well-known discovery documents are published. All probes returned 404 or a redirect to the site 404 handler.

@@ -1,0 +1,41 @@
+generated: '2026-07-20'
+method: searched
+source: https://docs.modernis.com/ (MODERN Partner API published documentation)
+authentication:
+  style: bearer-token
+  token_endpoint: POST /token (HTTP Basic -> Bearer)
+  token_lifetime_hours: 24
+  see: authentication/modern-authentication.yml
+request_tracing:
+  header: Modern-Request-Log-ID
+  direction: response
+  note: Returned on every request; store the value to receive support on a specific request.
+idempotency:
+  supported: false
+  note: >-
+    No idempotency-key header is documented. However the API implements server-side
+    duplicate prevention: work-order creation supports a dupe_check block and returns a
+    "Tried to create duplicate work order" failure, and note creation returns
+    error "prevented_duplicate_record" on a repeat value.
+pagination:
+  supported: unknown
+  note: List endpoints return plain JSON arrays; no pagination parameters are documented.
+versioning:
+  scheme: uri-path
+  current: v1
+  note: All resource endpoints are under /v1/. The /token endpoint is unversioned.
+error_envelope:
+  shape: '{ "error": "<code>", "error_msg": "<human message>" }'
+  content_type: application/json
+  see: errors/modern-error-codes.yml
+batch_semantics:
+  note: >-
+    Write endpoints for work orders (create/update/close) accept arrays and return a
+    batch result envelope { message, result: { total, successful, failed, failing_records[] } }
+    rather than failing the whole request; per-record failures are reported in failing_records.
+scoping:
+  dashboard_id: >-
+    Most read and write operations are scoped to a franchise dashboard via a dashboard_id
+    query parameter or body field; missing it yields 422 missing_required_params.
+rate_limit_signaling:
+  documented: false

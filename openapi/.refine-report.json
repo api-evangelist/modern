@@ -1,0 +1,28 @@
+{
+  "provider": "modern",
+  "sources": [
+    "modern-dashboards-api-openapi.yml",
+    "modern-events-api-openapi.yml",
+    "modern-federation-api-openapi.yml",
+    "modern-notes-api-openapi.yml",
+    "modern-notifications-api-openapi.yml",
+    "modern-technicians-api-openapi.yml",
+    "modern-users-api-openapi.yml",
+    "modern-work-orders-api-openapi.yml"
+  ],
+  "outputs": [
+    "modern-dashboards-api-openapi.yml",
+    "modern-events-api-openapi.yml",
+    "modern-federation-api-openapi.yml",
+    "modern-notes-api-openapi.yml",
+    "modern-notifications-api-openapi.yml",
+    "modern-technicians-api-openapi.yml",
+    "modern-users-api-openapi.yml",
+    "modern-work-orders-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

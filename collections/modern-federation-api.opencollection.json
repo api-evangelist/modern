@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MODERN Partner Dashboards Federation API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Federation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Request access token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://connect.modernis.com/token",
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Exchange the franchise username/password (via HTTP Basic auth) for a bearer access token. Tokens are valid for 24 hours and scoped to a single franchise."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

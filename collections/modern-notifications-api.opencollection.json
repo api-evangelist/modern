@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MODERN Partner Dashboards Notifications API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Notifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get notifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://connect.modernis.com/v1/notifications",
+            "params": [
+              {
+                "name": "dashboard_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get notifications"
+        },
+        {
+          "info": {
+            "name": "Send a notification",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://connect.modernis.com/v1/notifications",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send a notification"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

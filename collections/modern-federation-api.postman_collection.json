@@ -1,0 +1,174 @@
+{
+  "item": [
+    {
+      "id": "8832ea30-85e5-4509-b1c2-754a81d5c0a1",
+      "name": "Federation",
+      "description": {
+        "content": "Token exchange / authentication",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "38e967fe-77eb-4631-a5a7-c78d60e2f87d",
+          "name": "Request access token",
+          "request": {
+            "name": "Request access token",
+            "description": {
+              "content": "Exchange the franchise username/password (via HTTP Basic auth) for a bearer access token. Tokens are valid for 24 hours and scoped to a single franchise.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "490fa514-96ef-418c-8dbb-9b2721f6984b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"franchise\": \"string\",\n  \"access_token\": \"string\",\n  \"token_type\": \"Bearer\",\n  \"expires_in\": 4026\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cd641f2b-4502-4c6f-bea1-848d231fadff",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"error_msg\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://connect.modernis.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5fb75a32-7ed8-438a-abdd-16dfd219e95b",
+    "name": "MODERN Partner Dashboards Federation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Partner API for MODERN (modernis.com), a two-way customer interaction platform for heavy-equipment dealerships. The API lets authorized partners read dashboards, manage service work orders, post events and customer notifications, and maintain technicians and notes on a franchise's behalf. All requests use bearer-token authentication; tokens are obtained by exchanging franchise username/password via HTTP Basic auth against the /token endpoint and are valid for 24 hours, scoped to a single franchise. Every response returns a Modern-Request-Log-ID header used for support.\n\nContact Support:\n Name: MODERN Support",
+      "type": "text/plain"
+    }
+  }
+}

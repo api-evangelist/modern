@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MODERN Partner Dashboards Notes API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Notes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List notes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://connect.modernis.com/v1/notes",
+            "params": [
+              {
+                "name": "work_order_number",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "work_order_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List notes"
+        },
+        {
+          "info": {
+            "name": "Create note",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://connect.modernis.com/v1/notes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create note"
+        },
+        {
+          "info": {
+            "name": "Delete / redact note",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://connect.modernis.com/v1/notes/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete / redact note"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,381 @@
+{
+  "item": [
+    {
+      "id": "e51554ee-70ed-48b4-bc7c-0e423cf72bf9",
+      "name": "Events",
+      "description": {
+        "content": "Work-order event types and event creation",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "34ecb092-6303-41bb-bb87-b589e8f90b21",
+          "name": "List event types",
+          "request": {
+            "name": "List event types",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "event_types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "dashboard_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "823545ad-9126-4aed-b7b7-4fdad959bb41",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "event_types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dashboard_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"step\": 3298,\n    \"id\": 8704,\n    \"code\": \"string\"\n  },\n  {\n    \"name\": \"string\",\n    \"message\": \"string\",\n    \"step\": 266,\n    \"id\": 1247,\n    \"code\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "46e1aad5-bd62-4e7a-a37c-46f9368e2057",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "event_types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dashboard_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"error_msg\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cf1c68a6-ceb7-4e02-b487-f79d17555527",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "event_types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dashboard_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"error_msg\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9265bd80-83c5-4ce7-9c73-bcb13fa0b42b",
+          "name": "Create event",
+          "request": {
+            "name": "Create event",
+            "description": {
+              "content": "Record an event against a work order, optionally sending a customer notification and assigning a technician.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"work_order_number\": \"<string>\",\n  \"work_order_id\": \"<string>\",\n  \"event_type_id\": \"<integer>\",\n  \"send_notification\": \"<boolean>\",\n  \"notification\": \"<string>\",\n  \"notification_tags\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"technician\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"tech_id\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bcde360e-4660-46db-ac89-5b8e374b49b2",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"work_order_number\": \"<string>\",\n  \"work_order_id\": \"<string>\",\n  \"event_type_id\": \"<integer>\",\n  \"send_notification\": \"<boolean>\",\n  \"notification\": \"<string>\",\n  \"notification_tags\": {\n    \"key_0\": \"<string>\"\n  },\n  \"technician\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"tech_id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"event_status\": \"string\",\n  \"event_id\": 9410,\n  \"notification_status\": \"string\",\n  \"notification_id\": 8148,\n  \"technician_status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c3fd1235-bf8e-4d3d-b522-bb9a29a0ffed",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"work_order_number\": \"<string>\",\n  \"work_order_id\": \"<string>\",\n  \"event_type_id\": \"<integer>\",\n  \"send_notification\": \"<boolean>\",\n  \"notification\": \"<string>\",\n  \"notification_tags\": {\n    \"key_0\": \"<string>\"\n  },\n  \"technician\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"tech_id\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"error_msg\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://connect.modernis.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "701b8ab6-2213-479d-adff-c22c8925c4e7",
+    "name": "MODERN Partner Dashboards Events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Partner API for MODERN (modernis.com), a two-way customer interaction platform for heavy-equipment dealerships. The API lets authorized partners read dashboards, manage service work orders, post events and customer notifications, and maintain technicians and notes on a franchise's behalf. All requests use bearer-token authentication; tokens are obtained by exchanging franchise username/password via HTTP Basic auth against the /token endpoint and are valid for 24 hours, scoped to a single franchise. Every response returns a Modern-Request-Log-ID header used for support.\n\nContact Support:\n Name: MODERN Support",
+      "type": "text/plain"
+    }
+  }
+}

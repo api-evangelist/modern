@@ -1,0 +1,120 @@
+{
+  "item": [
+    {
+      "id": "e21b5c42-fc5b-46a5-9d0f-4554ac84d70f",
+      "name": "Users",
+      "description": {
+        "content": "Dashboard users",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "91c6cca3-c7dd-47d3-8d4b-4bb7ccd02bfc",
+          "name": "List users",
+          "request": {
+            "name": "List users",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "dashboard_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "210801d3-e521-4dbb-a2d9-dd3e86036870",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dashboard_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://connect.modernis.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b91e5241-113d-43f9-84b0-290dfb962f30",
+    "name": "MODERN Partner Dashboards Users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Partner API for MODERN (modernis.com), a two-way customer interaction platform for heavy-equipment dealerships. The API lets authorized partners read dashboards, manage service work orders, post events and customer notifications, and maintain technicians and notes on a franchise's behalf. All requests use bearer-token authentication; tokens are obtained by exchanging franchise username/password via HTTP Basic auth against the /token endpoint and are valid for 24 hours, scoped to a single franchise. Every response returns a Modern-Request-Log-ID header used for support.\n\nContact Support:\n Name: MODERN Support",
+      "type": "text/plain"
+    }
+  }
+}

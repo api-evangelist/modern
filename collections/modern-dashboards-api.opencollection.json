@@ -1,0 +1,46 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MODERN Partner Dashboards API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Dashboards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List dashboards",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://connect.modernis.com/v1/dashboards"
+          },
+          "docs": "List the franchise's dashboards."
+        },
+        {
+          "info": {
+            "name": "List dashboard types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://connect.modernis.com/v1/dashboards/types"
+          },
+          "docs": "List dashboard types"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

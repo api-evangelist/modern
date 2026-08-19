@@ -1,0 +1,117 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MODERN Partner Dashboards Work Orders API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Work Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List work orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://connect.modernis.com/v1/work_orders",
+            "params": [
+              {
+                "name": "dashboard_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List work orders"
+        },
+        {
+          "info": {
+            "name": "Create work orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://connect.modernis.com/v1/work_orders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create one or more work orders. Returns a batch processing result."
+        },
+        {
+          "info": {
+            "name": "Update work order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://connect.modernis.com/v1/work_orders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update work order"
+        },
+        {
+          "info": {
+            "name": "Get work order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://connect.modernis.com/v1/work_orders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "dashboard_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get work order"
+        },
+        {
+          "info": {
+            "name": "Close work order",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://connect.modernis.com/v1/work_orders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Close work order"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

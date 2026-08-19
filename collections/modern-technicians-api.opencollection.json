@@ -1,0 +1,101 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MODERN Partner Dashboards Technicians API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Technicians",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List technicians",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://connect.modernis.com/v1/technicians",
+            "params": [
+              {
+                "name": "dashboard_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List technicians"
+        },
+        {
+          "info": {
+            "name": "Create technician",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://connect.modernis.com/v1/technicians",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create technician"
+        },
+        {
+          "info": {
+            "name": "Update technician",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://connect.modernis.com/v1/technicians/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update technician"
+        },
+        {
+          "info": {
+            "name": "Delete technician",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://connect.modernis.com/v1/technicians/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Delete technician"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

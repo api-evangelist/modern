@@ -1,0 +1,600 @@
+{
+  "item": [
+    {
+      "id": "d928b51e-87e0-4684-9c6e-9f04a3f65e24",
+      "name": "Work Orders",
+      "description": {
+        "content": "Service work order lifecycle",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "03def808-6068-4525-8ccb-c15e3a225809",
+          "name": "List work orders",
+          "request": {
+            "name": "List work orders",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "work_orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "dashboard_id",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "724921ad-11d7-45cf-b237-a6b49761fe19",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "work_orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dashboard_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"number\": \"string\",\n    \"wo_number\": \"string\",\n    \"created\": \"2015-12-28T09:36:31.415Z\",\n    \"last_customer_update\": \"1990-09-17T19:38:21.128Z\",\n    \"status\": \"active\",\n    \"id\": \"string\",\n    \"last_event\": {}\n  },\n  {\n    \"number\": \"string\",\n    \"wo_number\": \"string\",\n    \"created\": \"2025-02-21T17:54:29.725Z\",\n    \"last_customer_update\": \"2006-08-31T07:32:52.372Z\",\n    \"status\": \"active\",\n    \"id\": \"string\",\n    \"last_event\": {}\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c0c18db2-aa2b-44f6-a643-cdde6b987508",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "work_orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dashboard_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"not_found\",\n  \"error_msg\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4d11933e-273d-42cc-86d5-5578986c4e19",
+          "name": "Create work orders",
+          "request": {
+            "name": "Create work orders",
+            "description": {
+              "content": "Create one or more work orders. Returns a batch processing result.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "work_orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dashboard_id\": \"<string>\",\n  \"advisor\": {\n    \"id\": \"<string>\",\n    \"email_address\": \"<string>\"\n  },\n  \"work_order\": {\n    \"number\": \"<string>\",\n    \"overview\": \"<string>\",\n    \"internal_overview\": \"<string>\",\n    \"dashboard_indicator\": \"<string>\",\n    \"priority\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1086c61d-5e86-4851-8206-bee11ff92efb",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "work_orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dashboard_id\": \"<string>\",\n  \"advisor\": {\n    \"id\": \"<string>\",\n    \"email_address\": \"<string>\"\n  },\n  \"work_order\": {\n    \"number\": \"string\",\n    \"overview\": \"string\",\n    \"internal_overview\": \"string\",\n    \"dashboard_indicator\": \"string\",\n    \"priority\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"result\": {\n    \"total\": 5259,\n    \"successful\": 9438,\n    \"failed\": 8621,\n    \"failing_records\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f61bd5d0-97b7-4ce1-b76f-bb23e6bc0f4d",
+          "name": "Update work order",
+          "request": {
+            "name": "Update work order",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "work_orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"dashboard_id\": \"<string>\",\n    \"work_order\": {\n      \"number\": \"<string>\",\n      \"overview\": \"<string>\",\n      \"internal_overview\": \"<string>\",\n      \"dashboard_indicator\": \"<string>\",\n      \"priority\": \"<string>\"\n    }\n  },\n  {\n    \"dashboard_id\": \"<string>\",\n    \"work_order\": {\n      \"number\": \"<string>\",\n      \"overview\": \"<string>\",\n      \"internal_overview\": \"<string>\",\n      \"dashboard_indicator\": \"<string>\",\n      \"priority\": \"<string>\"\n    }\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "36269314-eea2-494d-8455-e4155a6d6ad6",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "work_orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"dashboard_id\": \"<string>\",\n    \"work_order\": {\n      \"number\": \"string\",\n      \"overview\": \"string\",\n      \"internal_overview\": \"string\",\n      \"dashboard_indicator\": \"string\",\n      \"priority\": \"string\"\n    }\n  },\n  {\n    \"dashboard_id\": \"<string>\",\n    \"work_order\": {\n      \"number\": \"string\",\n      \"overview\": \"string\",\n      \"internal_overview\": \"string\",\n      \"dashboard_indicator\": \"string\",\n      \"priority\": \"string\"\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"result\": {\n    \"total\": 5259,\n    \"successful\": 9438,\n    \"failed\": 8621,\n    \"failing_records\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8b600af0-28df-4108-9cc8-22fac704945d",
+          "name": "Get work order",
+          "request": {
+            "name": "Get work order",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "work_orders",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "dashboard_id",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6c1224b2-c81e-431d-8e5e-50ec1450b744",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "work_orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dashboard_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"number\": \"string\",\n    \"wo_number\": \"string\",\n    \"created\": \"2015-12-28T09:36:31.415Z\",\n    \"last_customer_update\": \"1990-09-17T19:38:21.128Z\",\n    \"status\": \"active\",\n    \"id\": \"string\",\n    \"last_event\": {}\n  },\n  {\n    \"number\": \"string\",\n    \"wo_number\": \"string\",\n    \"created\": \"2025-02-21T17:54:29.725Z\",\n    \"last_customer_update\": \"2006-08-31T07:32:52.372Z\",\n    \"status\": \"active\",\n    \"id\": \"string\",\n    \"last_event\": {}\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e616d04a-145a-4345-a470-334f2dcdcf5e",
+          "name": "Close work order",
+          "request": {
+            "name": "Close work order",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "work_orders",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"work_order\": {\n      \"number\": \"<string>\"\n    }\n  },\n  {\n    \"work_order\": {\n      \"number\": \"<string>\"\n    }\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ad22dbe8-9709-46ca-8cff-96668c02cb1a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "work_orders",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"work_order\": {\n      \"number\": \"<string>\"\n    }\n  },\n  {\n    \"work_order\": {\n      \"number\": \"<string>\"\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"result\": {\n    \"total\": 5259,\n    \"successful\": 9438,\n    \"failed\": 8621,\n    \"failing_records\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://connect.modernis.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "dfa06cf3-c2ba-4ff6-8b75-9565326afafd",
+    "name": "MODERN Partner Dashboards Work Orders API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Partner API for MODERN (modernis.com), a two-way customer interaction platform for heavy-equipment dealerships. The API lets authorized partners read dashboards, manage service work orders, post events and customer notifications, and maintain technicians and notes on a franchise's behalf. All requests use bearer-token authentication; tokens are obtained by exchanging franchise username/password via HTTP Basic auth against the /token endpoint and are valid for 24 hours, scoped to a single franchise. Every response returns a Modern-Request-Log-ID header used for support.\n\nContact Support:\n Name: MODERN Support",
+      "type": "text/plain"
+    }
+  }
+}

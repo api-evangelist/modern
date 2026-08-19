@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "MODERN Partner Dashboards Events API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List event types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://connect.modernis.com/v1/event_types",
+            "params": [
+              {
+                "name": "dashboard_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List event types"
+        },
+        {
+          "info": {
+            "name": "Create event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://connect.modernis.com/v1/events",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Record an event against a work order, optionally sending a customer notification and assigning a technician."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

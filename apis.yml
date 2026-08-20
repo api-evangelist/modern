@@ -41,6 +41,15 @@ tags:
 - Field Service
 - Work Orders
 - Customer Communications
+- Notification
+- Partner API
+tags_raw:
+- Company
+- Heavy Equipment
+- Dealership
+- Field Service
+- Work Orders
+- Customer Communications
 - Notifications
 - Partner API
 apis:
@@ -79,6 +88,8 @@ apis:
   humanURL: https://docs.modernis.com/
   baseURL: https://connect.modernis.com
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
@@ -166,6 +177,8 @@ apis:
   humanURL: https://docs.modernis.com/
   baseURL: https://connect.modernis.com
   tags:
+  - Notification
+  tags_raw:
   - Notifications
   properties:
   - type: OpenAPI
@@ -224,6 +237,8 @@ apis:
   humanURL: https://docs.modernis.com/
   baseURL: https://connect.modernis.com
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI

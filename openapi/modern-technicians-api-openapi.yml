@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: MODERN Partner Dashboards Technicians API
   version: v1
@@ -138,6 +138,15 @@ paths:
                     example: deleted
 components:
   schemas:
+    Error:
+      type: object
+      description: MODERN error envelope.
+      properties:
+        error:
+          type: string
+          example: not_found
+        error_msg:
+          type: string
     Technician:
       type: object
       properties:
@@ -148,15 +157,6 @@ components:
         tech_id:
           type: string
         status:
-          type: string
-    Error:
-      type: object
-      description: MODERN error envelope.
-      properties:
-        error:
-          type: string
-          example: not_found
-        error_msg:
           type: string
   securitySchemes:
     basicAuth:

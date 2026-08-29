@@ -23,6 +23,16 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
+  "notes": [
+    "modern-dashboards-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "modern-events-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "modern-federation-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "modern-notes-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "modern-notifications-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "modern-technicians-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "modern-users-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "modern-work-orders-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
   "skipped": []
 }

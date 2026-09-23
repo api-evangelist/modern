@@ -1,7 +1,20 @@
 generated: '2026-07-20'
 method: probed
 host: https://modernis.com
-documents:
+also_probed:
+- host: https://service.modernis.com
+  results:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+notes: No .well-known discovery documents are published. All probes returned 404 or a redirect to the
+  site 404 handler.
+hosts:
+- host: https://modernis.com
+  documents:
   - path: /.well-known/security.txt
     status: 404
   - path: /.well-known/openid-configuration
@@ -13,10 +26,8 @@ documents:
     status: 301
   - path: /.well-known/ai-plugin.json
     status: 301
-also_probed:
-  - host: https://service.modernis.com
-    results:
-      - {path: /.well-known/security.txt, status: 404}
-      - {path: /.well-known/openid-configuration, status: 404}
-      - {path: /.well-known/oauth-authorization-server, status: 404}
-notes: No .well-known discovery documents are published. All probes returned 404 or a redirect to the site 404 handler.
+x-shape-fix:
+  converted: '2026-08-20'
+  from: documents
+  note: Rewritten into hosts[] -> documents[], the only shape well_known_docs() in score.rb reads. A served
+    .well-known surface recorded in any other shape scores as absent.

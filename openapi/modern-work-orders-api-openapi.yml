@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: MODERN Partner Dashboards Work Orders API
+  title: MODERN Partner Work Orders API
   version: v1
-  description: Partner API for MODERN (modernis.com), a two-way customer interaction platform for heavy-equipment dealerships. The API lets authorized partners read dashboards, manage service work orders, post events and customer notifications, and maintain technicians and notes on a franchise's behalf. All requests use bearer-token authentication; tokens are obtained by exchanging franchise username/password via HTTP Basic auth against the /token endpoint and are valid for 24 hours, scoped to a single franchise. Every response returns a Modern-Request-Log-ID header used for support.
+  description: Partner API for MODERN (modernis.com), a two-way customer interaction platform for heavy-equipment dealerships.
   contact:
     name: MODERN Support
     url: https://docs.modernis.com/
@@ -148,15 +148,51 @@ paths:
                 $ref: '#/components/schemas/BatchResult'
 components:
   schemas:
-    Error:
+    WorkOrderInput:
       type: object
-      description: MODERN error envelope.
       properties:
-        error:
+        number:
           type: string
-          example: not_found
-        error_msg:
+        overview:
           type: string
+        internal_overview:
+          type: string
+        dashboard_indicator:
+          type: string
+        priority:
+          type: string
+    CreateWorkOrderRequest:
+      type: object
+      properties:
+        dashboard_id:
+          type: string
+        advisor:
+          type: object
+          properties:
+            id:
+              type: string
+            email_address:
+              type: string
+        work_order:
+          $ref: '#/components/schemas/WorkOrderInput'
+    BatchResult:
+      type: object
+      properties:
+        message:
+          type: string
+        result:
+          type: object
+          properties:
+            total:
+              type: integer
+            successful:
+              type: integer
+            failed:
+              type: integer
+            failing_records:
+              type: array
+              items:
+                type: string
     WorkOrder:
       type: object
       properties:
@@ -177,51 +213,15 @@ components:
           type: string
         last_event:
           type: object
-    WorkOrderInput:
+    Error:
       type: object
+      description: MODERN error envelope.
       properties:
-        number:
+        error:
           type: string
-        overview:
+          example: not_found
+        error_msg:
           type: string
-        internal_overview:
-          type: string
-        dashboard_indicator:
-          type: string
-        priority:
-          type: string
-    BatchResult:
-      type: object
-      properties:
-        message:
-          type: string
-        result:
-          type: object
-          properties:
-            total:
-              type: integer
-            successful:
-              type: integer
-            failed:
-              type: integer
-            failing_records:
-              type: array
-              items:
-                type: string
-    CreateWorkOrderRequest:
-      type: object
-      properties:
-        dashboard_id:
-          type: string
-        advisor:
-          type: object
-          properties:
-            id:
-              type: string
-            email_address:
-              type: string
-        work_order:
-          $ref: '#/components/schemas/WorkOrderInput'
   securitySchemes:
     basicAuth:
       type: http

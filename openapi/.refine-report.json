@@ -1,14 +1,7 @@
 {
   "provider": "modern",
   "sources": [
-    "modern-dashboards-api-openapi.yml",
-    "modern-events-api-openapi.yml",
-    "modern-federation-api-openapi.yml",
-    "modern-notes-api-openapi.yml",
-    "modern-notifications-api-openapi.yml",
-    "modern-technicians-api-openapi.yml",
-    "modern-users-api-openapi.yml",
-    "modern-work-orders-api-openapi.yml"
+    "_ae-authored/modern-partner-api-openapi.yml"
   ],
   "outputs": [
     "modern-dashboards-api-openapi.yml",
@@ -24,15 +17,18 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "modern-dashboards-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "modern-events-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "modern-federation-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "modern-notes-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "modern-notifications-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "modern-technicians-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "modern-users-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "modern-work-orders-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "modern-partner-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "modern-dashboards-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "modern-events-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "modern-federation-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "modern-notes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "modern-notifications-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "modern-technicians-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "modern-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "modern-work-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

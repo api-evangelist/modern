@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: MODERN Partner Dashboards Notes API
+  title: MODERN Partner Notes API
   version: v1
-  description: Partner API for MODERN (modernis.com), a two-way customer interaction platform for heavy-equipment dealerships. The API lets authorized partners read dashboards, manage service work orders, post events and customer notifications, and maintain technicians and notes on a franchise's behalf. All requests use bearer-token authentication; tokens are obtained by exchanging franchise username/password via HTTP Basic auth against the /token endpoint and are valid for 24 hours, scoped to a single franchise. Every response returns a Modern-Request-Log-ID header used for support.
+  description: Partner API for MODERN (modernis.com), a two-way customer interaction platform for heavy-equipment dealerships.
   contact:
     name: MODERN Support
     url: https://docs.modernis.com/
@@ -112,15 +112,6 @@ paths:
                     example: deleted
 components:
   schemas:
-    Error:
-      type: object
-      description: MODERN error envelope.
-      properties:
-        error:
-          type: string
-          example: not_found
-        error_msg:
-          type: string
     Note:
       type: object
       properties:
@@ -136,6 +127,15 @@ components:
           type: string
           format: date-time
         id:
+          type: string
+    Error:
+      type: object
+      description: MODERN error envelope.
+      properties:
+        error:
+          type: string
+          example: not_found
+        error_msg:
           type: string
   securitySchemes:
     basicAuth:

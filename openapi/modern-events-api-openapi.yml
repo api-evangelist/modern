@@ -119,6 +119,15 @@ components:
               type: string
             tech_id:
               type: string
+    Error:
+      type: object
+      description: MODERN error envelope.
+      properties:
+        error:
+          type: string
+          example: not_found
+        error_msg:
+          type: string
     EventType:
       type: object
       properties:
@@ -131,15 +140,6 @@ components:
         id:
           type: integer
         code:
-          type: string
-    Error:
-      type: object
-      description: MODERN error envelope.
-      properties:
-        error:
-          type: string
-          example: not_found
-        error_msg:
           type: string
   securitySchemes:
     basicAuth:

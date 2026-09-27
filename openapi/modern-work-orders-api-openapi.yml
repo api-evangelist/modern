@@ -161,20 +161,15 @@ components:
           type: string
         priority:
           type: string
-    CreateWorkOrderRequest:
+    Error:
       type: object
+      description: MODERN error envelope.
       properties:
-        dashboard_id:
+        error:
           type: string
-        advisor:
-          type: object
-          properties:
-            id:
-              type: string
-            email_address:
-              type: string
-        work_order:
-          $ref: '#/components/schemas/WorkOrderInput'
+          example: not_found
+        error_msg:
+          type: string
     BatchResult:
       type: object
       properties:
@@ -193,6 +188,20 @@ components:
               type: array
               items:
                 type: string
+    CreateWorkOrderRequest:
+      type: object
+      properties:
+        dashboard_id:
+          type: string
+        advisor:
+          type: object
+          properties:
+            id:
+              type: string
+            email_address:
+              type: string
+        work_order:
+          $ref: '#/components/schemas/WorkOrderInput'
     WorkOrder:
       type: object
       properties:
@@ -213,15 +222,6 @@ components:
           type: string
         last_event:
           type: object
-    Error:
-      type: object
-      description: MODERN error envelope.
-      properties:
-        error:
-          type: string
-          example: not_found
-        error_msg:
-          type: string
   securitySchemes:
     basicAuth:
       type: http

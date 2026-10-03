@@ -148,6 +148,20 @@ paths:
                 $ref: '#/components/schemas/BatchResult'
 components:
   schemas:
+    CreateWorkOrderRequest:
+      type: object
+      properties:
+        dashboard_id:
+          type: string
+        advisor:
+          type: object
+          properties:
+            id:
+              type: string
+            email_address:
+              type: string
+        work_order:
+          $ref: '#/components/schemas/WorkOrderInput'
     WorkOrderInput:
       type: object
       properties:
@@ -161,6 +175,26 @@ components:
           type: string
         priority:
           type: string
+    WorkOrder:
+      type: object
+      properties:
+        number:
+          type: string
+        wo_number:
+          type: string
+        created:
+          type: string
+          format: date-time
+        last_customer_update:
+          type: string
+          format: date-time
+        status:
+          type: string
+          example: active
+        id:
+          type: string
+        last_event:
+          type: object
     Error:
       type: object
       description: MODERN error envelope.
@@ -188,40 +222,6 @@ components:
               type: array
               items:
                 type: string
-    CreateWorkOrderRequest:
-      type: object
-      properties:
-        dashboard_id:
-          type: string
-        advisor:
-          type: object
-          properties:
-            id:
-              type: string
-            email_address:
-              type: string
-        work_order:
-          $ref: '#/components/schemas/WorkOrderInput'
-    WorkOrder:
-      type: object
-      properties:
-        number:
-          type: string
-        wo_number:
-          type: string
-        created:
-          type: string
-          format: date-time
-        last_customer_update:
-          type: string
-          format: date-time
-        status:
-          type: string
-          example: active
-        id:
-          type: string
-        last_event:
-          type: object
   securitySchemes:
     basicAuth:
       type: http

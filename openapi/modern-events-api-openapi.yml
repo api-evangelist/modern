@@ -93,6 +93,15 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Error:
+      type: object
+      description: MODERN error envelope.
+      properties:
+        error:
+          type: string
+          example: not_found
+        error_msg:
+          type: string
     CreateEventRequest:
       type: object
       properties:
@@ -119,15 +128,6 @@ components:
               type: string
             tech_id:
               type: string
-    Error:
-      type: object
-      description: MODERN error envelope.
-      properties:
-        error:
-          type: string
-          example: not_found
-        error_msg:
-          type: string
     EventType:
       type: object
       properties:

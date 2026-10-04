@@ -162,19 +162,6 @@ components:
               type: string
         work_order:
           $ref: '#/components/schemas/WorkOrderInput'
-    WorkOrderInput:
-      type: object
-      properties:
-        number:
-          type: string
-        overview:
-          type: string
-        internal_overview:
-          type: string
-        dashboard_indicator:
-          type: string
-        priority:
-          type: string
     WorkOrder:
       type: object
       properties:
@@ -195,15 +182,6 @@ components:
           type: string
         last_event:
           type: object
-    Error:
-      type: object
-      description: MODERN error envelope.
-      properties:
-        error:
-          type: string
-          example: not_found
-        error_msg:
-          type: string
     BatchResult:
       type: object
       properties:
@@ -222,6 +200,28 @@ components:
               type: array
               items:
                 type: string
+    Error:
+      type: object
+      description: MODERN error envelope.
+      properties:
+        error:
+          type: string
+          example: not_found
+        error_msg:
+          type: string
+    WorkOrderInput:
+      type: object
+      properties:
+        number:
+          type: string
+        overview:
+          type: string
+        internal_overview:
+          type: string
+        dashboard_indicator:
+          type: string
+        priority:
+          type: string
   securitySchemes:
     basicAuth:
       type: http

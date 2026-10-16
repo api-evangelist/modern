@@ -1,0 +1,21 @@
+{
+  "repo": "modern",
+  "feeds": [
+    {
+      "source": "https://modernis.com/blog/",
+      "feed_url": "https://modernis.com/blog/",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    },
+    {
+      "source": "https://modernis.com/feed/",
+      "feed_url": "https://modernis.com/feed/",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-10-10T13:15:00Z"
+}
